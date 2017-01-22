@@ -1,0 +1,85 @@
+﻿@using JonesFamilyBusinessApp.ViewModel
+@model IndexViewModel
+
+<br />
+<div class="panel panel-primary">
+    <div class="panel-heading">Complete the following data</div>
+    <div class="panel-body">
+        <form class="form-horizontal" action="/Home/Save" method="post">
+            <div class="form-group">
+                <label for="startTime" class="control-label col-xs-2">Start Time</label>
+                <div class="col-xs-5">
+                    <input type="time" step="900" class="form-control" id="startTime" name="startTime" value="@Model.startTime.ToString("hh\\:mm")" onchange="ChangeTime('startTime','hours','endTime')">
+                    <span class="help-block">Start Time with format hh:mm (Minutes must be dividable for 15)</span>
+                </div>
+               <div class="col-xs-5" role="alert" id="startTimeErrorColumn">
+               </div>
+            </div>
+            <div class="form-group">
+                <label for="hours" class="control-label col-xs-2">Hours</label>
+                <div class="col-xs-5">
+                    <input type="number" step="0.25" class="form-control" id="hours" name="hours" value="@Model.hours" onchange="ChangeTime('startTime','hours','endTime')">
+                    <span class="help-block">Hours is a decimal number with 2 decimal (Number must be dividable for 0.25) between 0 and 12</span>
+
+
+                </div>
+                <div class="col-xs-5" role="alert" id="hoursErrorColumn">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="endTime" class="control-label col-xs-2">End Time</label>
+                <div class="col-xs-5">
+                    <input type="time" class="form-control" id="endTime" name="endTime" value="@Model.endTime.ToString("hh\\:mm")" disabled>
+                </div>
+                <div class="col-xs-5" role="alert" id="endTimeErrorColumn">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-offset-2 col-xs-10">
+                    <button type="submit" class="btn btn-primary" onclick="return IsValidForm();">
+                        <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                    Save
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+@Html.Action("TimesList", "Home")
+
+@Scripts.Render("~/bundles/privatescripts")
+@{
+    //Scripts.Render("~/bundles/jquery");
+    //Scripts.Render("~/bundles/jqueryval");
+}
+<script>
+    @{
+        // Error for startTime
+        if (Model.errors.ContainsKey("startTime"))
+        {
+            <Text>
+            UIControler.addError('startTime', '@Model.errors["startTime"]');
+            </text>
+        }
+
+        // Error for startTime
+        if (Model.errors.ContainsKey("hours"))
+        {
+            <Text>
+            UIControler.addError('hours', '@Model.errors["hours"]');
+            </text>
+        }
+
+        // Error for startTime
+        if (Model.errors.ContainsKey("endTime"))
+        {
+            <Text>
+            UIControler.addError('endTime', '@Model.errors["endTime"]');
+            </text>
+        }
+    }
+
+</script>
+
+
+
