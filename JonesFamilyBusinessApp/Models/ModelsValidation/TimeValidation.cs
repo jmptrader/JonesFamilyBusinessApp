@@ -60,7 +60,7 @@ namespace JonesFamilyBusinessApp.Models.ModelsValidation
             }
             else
             {
-                if (!Regex.IsMatch(value.ToString(), @"^(\d|1[0-1]?)([.|,](((00|25)|50)|75))?$"))
+                if (!Regex.IsMatch(value.ToString(), @"^(\d|1[0-1]?)([.|,](((00?|25)|50?)|75))?$"))
                 {
                     return new ValidationResult("Format Incorrect");
                 }
